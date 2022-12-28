@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
+from urllib.parse import urlsplit, parse_qs
 
 def parse(query: str) -> dict:
-    return {}
+    return dict((k, v if len(v)>1 else v[0] ) for k, v in parse_qs(urlsplit(query).query).items())
 
 
 if __name__ == '__main__':
@@ -10,6 +11,7 @@ if __name__ == '__main__':
     assert parse('http://example.com/') == {}
     assert parse('http://example.com/?') == {}
     assert parse('http://example.com/?name=Dima') == {'name': 'Dima'}
+    '''gen_some_tests for 10 in tests do profit'''
 
 
 def parse_cookie(query: str) -> dict:
