@@ -14,8 +14,19 @@ if __name__ == '__main__':
 
 
 def parse_cookie(query: str) -> dict:
-    return {}
-
+    n = query.split(';')
+    r = {}
+    for i in n:
+        if '=' in i:
+            k, v = i.split('=', 1)
+            if k in r:
+                if isinstance(r[k], list):
+                    r[k].append(k)
+                else:
+                    r[k] = [r[k], v]
+            else:
+                r[k] = v
+    return r
 
 if __name__ == '__main__':
     assert parse_cookie('name=Dima;') == {'name': 'Dima'}
