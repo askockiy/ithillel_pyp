@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
-from urllib.parse import urlsplit, parse_qs
+from urllib.parse import urlsplit, parse_qsl
 
-def parse(query: str) -> dict:
-    return dict((k, v if len(v)>1 else v[0]) for k, v in parse_qs(urlsplit(query).query).items())
+def parse_url(url: str) -> dict:
+    return dict(parse_qsl(urlsplit(url).query))
 
 if __name__ == '__main__':
-    assert parse('https://example.com/path/to/page?name=ferret&color=purple') == {'name': 'ferret', 'color': 'purple'}
-    assert parse('https://example.com/path/to/page?name=ferret&color=purple&') == {'name': 'ferret', 'color': 'purple'}
-    assert parse('http://example.com/') == {}
-    assert parse('http://example.com/?') == {}
-    assert parse('http://example.com/?name=Dima') == {'name': 'Dima'}
-    '''gen_some_tests for 10 in tests do profit'''
-
+    assert parse_url('https://example.com/path/to/page?name=ferret&color=purple') == {'name': 'ferret', 'color': 'purple'}
+    assert parse_url('https://example.com/path/to/page?name=ferret&color=purple&') == {'name': 'ferret', 'color': 'purple'}
+    assert parse_url('http://example.com/') == {}
+    assert parse_url('http://example.com/?') == {}
+    assert parse_url('http://example.com/?name=Dima') == {'name': 'Dima'}
+  
 
 def parse_cookie(query: str) -> dict:
     n = query.split(';')
