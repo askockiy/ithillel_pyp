@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from urllib.parse import urlsplit, parse_qsl
+from urllib.parse import urlsplit, parse_qs, parse_qsl
 
 def parse_url(url: str) -> dict:
     return dict(parse_qsl(urlsplit(url).query))
@@ -13,19 +13,7 @@ if __name__ == '__main__':
   
 
 def parse_cookie(query: str) -> dict:
-    n = query.split(';')
-    r = {}
-    for i in n:
-        if '=' in i:
-            k, v = i.split('=', 1)
-            if k in r:
-                if isinstance(r[k], list):
-                    r[k].append(k)
-                else:
-                    r[k] = [r[k], v]
-            else:
-                r[k] = v
-    return r
+    return dict(parse_qsl(urlsplit(query).path, separator=';'))
 
 if __name__ == '__main__':
     assert parse_cookie('name=Dima;') == {'name': 'Dima'}
