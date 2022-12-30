@@ -17,7 +17,7 @@ def parse_cookie(query: str) -> dict:
     return dict(parse_qsl(urlsplit(query).path, separator=';'))
 
 if __name__ == '__main__':
-    print(parse_cookie('name=Dima=User;age=28;'))
-    assert parse_cookie('name=Dima=User;age=28;') == {'name': 'Dima=User', 'age': '28'}
     assert parse_cookie('name=Dima;') == {'name': 'Dima'}
     assert parse_cookie('') == {}
+    assert parse_cookie('name=Dima;age=28;') == {'name': 'Dima', 'age': '28'}
+    assert parse_cookie('name=Dima=User;age=28;') == {'name': 'Dima=User', 'age': '28'}
