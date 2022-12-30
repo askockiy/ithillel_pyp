@@ -32,8 +32,8 @@ if __name__ == '__main__':
     assert parse_cookie('') == {}
     assert parse_cookie('name=Dima;age=28;') == {'name': 'Dima', 'age': '28'}
     assert parse_cookie('name=Dima=User;age=28;') == {'name': 'Dima=User', 'age': '28'}
-    assert parse_cookie('i=00;p=***&^%') == {'id': '00', 'p': '***&^%'}
-    assert parse_cookie('i=01;;;;p=!@\/\/\//\///') == {'id': '01', 'p': '!@\\/\\/\\//\\///'}
+    assert parse_cookie('i=00;p=***&^%') == {'i': '00', 'p': '***&^%'}
+    assert parse_cookie('i=01;;;;p=!@\/\/\//\///') == {'i': '01', 'p': '!@\\/\\/\\//\\///'}
     assert parse_cookie(';;;;;;') == {}
     assert parse_cookie('user=asd;;lastn=ddd;ad=vvv') == {'user': 'asd', 'lastn': 'ddd', 'ad': 'vvv'}
     assert parse_cookie('d=1;d=2') == {'d': '2'}
